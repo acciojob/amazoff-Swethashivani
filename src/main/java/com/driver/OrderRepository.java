@@ -14,7 +14,6 @@ public class OrderRepository {
     HashMap<String, Order> orderDb = new HashMap<>();
     HashMap<String, DeliveryPartner> deliveryPartnerDb = new HashMap<>();
     HashMap<DeliveryPartner, List<Order>> deliveryPartnerOrderListDb = new HashMap<>();
-    List<Order> assignedOrders = new ArrayList<>();
 
     public void addOrderFromDb(Order order) {
         orderDb.put(order.getId(), order);
@@ -47,7 +46,6 @@ public class OrderRepository {
         }
         int orders = getPartnerByIdFromDB(partnerId).getNumberOfOrders();
         deliveryPartnerDb.get(partnerId).setNumberOfOrders(orders + 1);
-        assignedOrders.add(orderDb.get(orderId));
 
     }
 
