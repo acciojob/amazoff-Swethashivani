@@ -102,8 +102,12 @@ public class OrderRepository {
     public String getLastDeliveryTimeByPartnerIdFromDb(String partnerId) {
         List<Order> orderList = new ArrayList<>();
         orderList = deliveryPartnerOrderListDb.getOrDefault(getPartnerByIdFromDB(partnerId), null);
+
+        int time = 0;
+        for (Order order : orderList) {
+            time = Math.max(time, order.getDeliveryTime());
+        }
         Order order = orderList.get(orderList.size() - 1);
-        int time = order.getDeliveryTime();
         String timeInString = "";
         int h = time / 60;
         int m = time % 60;
